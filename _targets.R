@@ -1,6 +1,6 @@
 library(targets)
 library(tarchetypes) # Load other packages as needed.
-pacman::p_load(tidyverse, harrypotter, gt, quarto, gglm, webshot2, janitor, here, patchwork, lme4)
+pacman::p_load(tidyverse, harrypotter, gt, quarto, gglm, webshot2, janitor, here, patchwork, lme4, gt)
 pacman::p_load(showtext,ggrepel)
 
 tar_option_set(

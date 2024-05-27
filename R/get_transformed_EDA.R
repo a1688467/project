@@ -1,4 +1,4 @@
-get_transformed_EDA <- function(data) {
+get_transformed_EDA <- function(cleaned_data) {
   # Plot trans response
   cleaned_data %>% ggplot(aes(x=log(gene_expression))) + geom_histogram()
   ggsave(here::here("figs/loggene.pdf"))
