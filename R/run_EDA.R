@@ -1,6 +1,8 @@
 run_EDA <- function(cleaned_data) {
-  # Plot response vs predictors
-  # Save all plots
+
+  cleaned_data %>% ggplot(aes(x=gene_expression)) + geom_histogram()
+  ggsave(here::here("figs/gene.pdf"))
+
   cleaned_data %>% ggplot(aes(y = gene_expression, x = cell_line, colour = treatment)) + geom_boxplot()
   ggsave(here::here("figs/geneVsCellByTreament.pdf"))
   cleaned_data %>% ggplot(aes(y = gene_expression, x = treatment, colour = cell_line)) + geom_boxplot()

@@ -15,3 +15,87 @@ This project uses targets, xxxx so ensure you have the requirements installed al
 -   R vs r-code dir
 
 -   Check naming
+
+-   Add the here::here() code to this and report
+
+-   Fix treatment/Treatment
+
+-   Render this and report
+
+# Initial EDA
+
+xxx
+
+Many variations of models were done, but the two key ones were interation models and simple addetive ones. Most we're great but the three best models here were the following:
+
+1.  gene_expression \~ cell_line + treatment + name + conc + gene_expression
+
+2.  gene_expression \~ cell_line + treatment + conc + gene_expression + (name\*conc)
+
+3.  gene_expression \~ cell_line + treatment + conc + gene_expression
+
+```{r}
+tar_load(simple_models)
+AIC(simple_models[[1]], simple_models[[2]], simple_models[[3]])
+#Do this programatically
+
+```
+
+We can see that the addetive model with the name/concentration interactive terms has the lowest AIC. As seen in the EDA we expected this, so let's check assumptions and p-values:
+
+```{r}
+simple_model <- simple_models[[2]]
+summary(simple_model)
+gglm(simple_model)
+```
+
+Not great, but it's not the worst. A worry is all the warnings we are getting and the lack of significance (especially regarding concentration). Another alternative to try and see if we get an improvement is a mixed-effects model since it's expected that name is a separate level (the model with all interaction effects was a hot mess of errors).
+
+# Final model
+
+We see from express vs conc grouped by name that there's deffs individual effects and we aren't seeing significance in the lowest AIC model from before so let's see if a mixed-effects model works since experimentally it makes sense
+
+```{r}
+tar_load(simple_fitted_model)
+summary(simple_fitted_model)
+gglm(simple_fitted_model)
+
+```
+
+This xxx
+
+Let's check for significance:
+
+```{r}
+tar_load(pvalues_simple)
+
+print(pvalues_simple)
+```
+
+NOT all signif and assumptiosn suck due to non-linearity
+
+Let's try to transform the data by taking the log of gene expression and log(1+conc) since conc sometimes is equal to 0. This looks like:
+
+[***INSERT TRANSFORMED EDA***]{.underline}
+
+This looks good
+
+This gives:
+
+```{r}
+tar_load(fitted_model)
+summary(fitted_model)
+gglm(fitted_model)
+```
+
+Which looks a lot better
+
+```{r}
+tar_load(pvalues)
+
+print(pvalues)
+```
+
+Significant!
+
+# Better plots
