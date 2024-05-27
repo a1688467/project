@@ -1,0 +1,17 @@
+---
+title: "Readme"
+format: html
+editor: visual
+---
+
+# Running the project
+
+This project uses targets, xxxx so ensure you have the requirements installed already.
+
+## TODO
+
+-   All Karl work (Check with Jono the correctness)
+
+-   R vs r-code dir
+
+-   Check naming
