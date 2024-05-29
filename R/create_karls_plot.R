@@ -1,17 +1,5 @@
 create_karls_plot <- function(raw_data) {
 
-  # ## Add font
-  # font_add(
-  #   family = "times",
-  #   regular = here::here(
-  #     "Times New Roman.ttf"
-  #   )
-  # )
-#
-#   showtext_auto()
-#   showtext_opts(dpi = 500)
-
-
   col_pal <- c("#78a8d1", "#d5bf98")
   #tiff(filename = "plot.tiff", width = 9, height = 6, units = "in", res = 500)
 
@@ -24,10 +12,10 @@ create_karls_plot <- function(raw_data) {
       aes(label=name, fill = Treatment),
       show.legend = FALSE,
       #ylim =c(0,60),
-      xlim =c(10.15,11.1),
+      xlim =c(10.15,12.1),
       nudge_x = -0.5,
       colour="black", segment.colour="black",
-      min.segment.length = 0,
+      min.segment.length = 0.1,
       #hjust = 1,
     )+  scale_color_manual(values = col_pal)
 
@@ -40,10 +28,12 @@ create_karls_plot <- function(raw_data) {
       aes(label=name, fill = Treatment),
       show.legend = FALSE,
       #ylim =c(0,60),
-      xlim =c(10,11.27),
+      xlim =c(10,17.27),
       colour="black", segment.colour="black",
-      hjust = 1,
-      nudge_x = 0.2
+      nudge_x = 1.5,
+      nudge_y = 0.05,
+      min.segment.length = 0.1,
+
     )+  scale_color_manual(values = col_pal)
 
 
@@ -63,5 +53,5 @@ create_karls_plot <- function(raw_data) {
 #
 # # Driver
 # pacman::p_load(tidyverse,targets, showtext,ggrepel,patchwork)
-# d_file <- tar_load(cleaned_data)
+# tar_load(cleaned_data)
 # create_karls_plot(cleaned_data)
