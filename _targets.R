@@ -4,7 +4,7 @@ pacman::p_load(tidyverse, harrypotter, gt, quarto, gglm, webshot2, janitor, here
 pacman::p_load(showtext,ggrepel)
 
 tar_option_set(
-  packages = c("tidyverse", "harrypotter", "gt", "quarto", "gglm", "webshot2", "janitor") # Packages that your targets need for their tasks.
+  packages = c("tidyverse", "harrypotter", "gt", "quarto", "gglm", "webshot2", "janitor", "lme4", "lmerTest") # Packages that your targets need for their tasks.
 )
 
 tar_source()
