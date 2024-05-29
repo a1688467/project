@@ -12,23 +12,22 @@ tar_source()
 list(
   tar_file(raw_data_file, "raw-data/karl-data-4-3-24.xlsx"),
   tar_target(cleaned_data, clean_data(raw_data_file)),
+
   tar_target(eda, run_EDA(cleaned_data)),
-
-  tar_target(simple_models, fit_simple_models(cleaned_data)),
-  #tar_target(checked_simple_models, check_simple_models(simple_models)),
-
-  tar_target(simple_fitted_model, fit_simple_mixed_model(cleaned_data)),
-  tar_target(simple_pvalues, get_pvals(simple_fitted_model)),
-
-
   tar_target(karls_plot, create_karls_plot(cleaned_data)),
 
-  tar_target(transformed_eda, get_transformed_EDA(cleaned_data)),
 
-  tar_target(fitted_model, fit_model(cleaned_data)),
-  tar_target(pvalues, get_pvals(fitted_model)),
+  tar_target(simple_model, fit_simple_model(cleaned_data)),
+  tar_target(simple_pvalues, get_pvals(simple_model)),
 
-  tar_target(checked_model, check_model(fitted_model, cleaned_data)),
+  tar_target(twoway_model, fit_twoway_model(cleaned_data)),
+  tar_target(twoway_pvalues, get_pvals(twoway_model)),
 
-  tar_target(prediction_interval_plot, get_prediction_interval_plot(fitted_model, cleaned_data))
+
+  tar_target(threeway_model, fit_threeway_model(cleaned_data)),
+  tar_target(threeway_pvalues, get_pvals(threeway_model)),
+
+  # threeway is the best
+  tar_target(checked_model, check_model(threeway_model, cleaned_data)),
+  tar_target(prediction_interval_plot, get_prediction_interval_plot(threeway_model, cleaned_data))
 )

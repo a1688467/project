@@ -7,9 +7,9 @@ create_karls_plot <- function(raw_data) {
   #     "Times New Roman.ttf"
   #   )
   # )
-
-  showtext_auto()
-  showtext_opts(dpi = 500)
+#
+#   showtext_auto()
+#   showtext_opts(dpi = 500)
 
 
   col_pal <- c("#78a8d1", "#d5bf98")
@@ -57,13 +57,12 @@ create_karls_plot <- function(raw_data) {
 
   cc <- combined + plot_layout(guides = "collect") + labs(col = "Treatment") +  scale_fill_manual(values = col_pal) + scale_color_manual(values = col_pal)
 
-  ggsave(filename = here::here("figs/plot.tiff"), plot = cc, width = 9, height = 6, units = "in", dpi = 500)
+  ggsave(filename = here::here("figs/KarlsPlot.pdf"))
 
 }
 
 #
 # # Driver
-# pacman::p_load(tidyverse,targets, showtext,ggrepel,patchwork)
-# d_file <- tar_load(raw_data_file)
-# df <- clean_data(d_file)
-# create_karls_plot(df)
+pacman::p_load(tidyverse,targets, showtext,ggrepel,patchwork)
+d_file <- tar_load(cleaned_data)
+create_karls_plot(cleaned_data)

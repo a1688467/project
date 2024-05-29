@@ -10,8 +10,8 @@ get_pvals <- function(model) {
 }
 
 # Drivers
-pacman::p_load(tidyverse,targets, lme4, gt)
-tar_load(fitted_model)
-tab <- get_pvals(fitted_model)
-tab
+# pacman::p_load(tidyverse,targets, lme4, gt)
+# tar_load(fitted_model)
+# tab <- get_pvals(fitted_model)
+# tab
 
