@@ -52,17 +52,16 @@ create_karls_plot <- function(raw_data) {
     theme_bw() &
     harrypotter::scale_fill_hp_d("Ravenclaw") &
     theme(legend.position="bottom", panel.border=element_rect(size=1.1)) &
-    scale_x_continuous(limits = c(0,12),breaks = c(0,1,2,3,4,5,6,7,8,9, 10)) &  scale_fill_manual(values = col_pal) & scale_color_manual(values = col_pal) &
-    theme(text = element_text(family = "times"))
+    scale_x_continuous(limits = c(0,12),breaks = c(0,1,2,3,4,5,6,7,8,9, 10)) &  scale_fill_manual(values = col_pal) & scale_color_manual(values = col_pal)
 
   cc <- combined + plot_layout(guides = "collect") + labs(col = "Treatment") +  scale_fill_manual(values = col_pal) + scale_color_manual(values = col_pal)
 
-  ggsave(filename = here::here("figs/KarlsPlot.pdf"))
+  ggsave(filename = here::here("figs/KarlsPlot.pdf"), plot = cc)
 
 }
 
 #
 # # Driver
-pacman::p_load(tidyverse,targets, showtext,ggrepel,patchwork)
-d_file <- tar_load(cleaned_data)
-create_karls_plot(cleaned_data)
+# pacman::p_load(tidyverse,targets, showtext,ggrepel,patchwork)
+# d_file <- tar_load(cleaned_data)
+# create_karls_plot(cleaned_data)
