@@ -1,12 +1,12 @@
 create_karls_plot <- function(raw_data) {
 
-  ## Add font
-  font_add(
-    family = "times",
-    regular = here::here(
-      "Times New Roman.ttf"
-    )
-  )
+  # ## Add font
+  # font_add(
+  #   family = "times",
+  #   regular = here::here(
+  #     "Times New Roman.ttf"
+  #   )
+  # )
 
   showtext_auto()
   showtext_opts(dpi = 500)
