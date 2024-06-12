@@ -1,7 +1,7 @@
 check_model <- function(model, data) {
   gglm(model)
   # TODO name should be model name! Use tricks
-  ggsave(here::here("figs/assumptions_model.pdf"))
+  ggsave(here::here("figs/assumptions_model.svg"))
 }
 
 ## Driver
