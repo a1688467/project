@@ -1,10 +1,10 @@
 library(targets)
 library(tarchetypes) # Load other packages as needed.
-pacman::p_load(tidyverse, harrypotter, gt, quarto, gglm, webshot2, janitor, here, patchwork, lme4, gt, lmerTest)
+pacman::p_load(tidyverse, harrypotter, gt, quarto, gglm, webshot2, janitor, here, patchwork, lme4, gt, lmerTest, mixedup, pwr)
 pacman::p_load(showtext,ggrepel)
 
 tar_option_set(
-  packages = c("tidyverse", "harrypotter", "gt", "quarto", "gglm", "webshot2", "janitor", "lme4", "lmerTest") # Packages that your targets need for their tasks.
+  packages = c("tidyverse", "harrypotter", "gt", "quarto", "gglm", "webshot2", "janitor", "lme4", "lmerTest", "mixedup", "pwr") # Packages that your targets need for their tasks.
 )
 
 tar_source()
@@ -18,16 +18,19 @@ list(
 
 
   tar_target(simple_model, fit_simple_model(cleaned_data)),
-  tar_target(simple_pvalues, get_pvals(simple_model)),
-
   tar_target(twoway_model, fit_twoway_model(cleaned_data)),
-  tar_target(twoway_pvalues, get_pvals(twoway_model)),
-
-
   tar_target(threeway_model, fit_threeway_model(cleaned_data)),
-  tar_target(threeway_pvalues, get_pvals(threeway_model)),
+
+  tar_target(AIC_table, create_AIC_table(simple_model, twoway_model, threeway_model)),
 
   # threeway is the best
   tar_target(checked_model, check_model(threeway_model, cleaned_data)),
-  tar_target(prediction_interval_plot, get_prediction_interval_plot(threeway_model, cleaned_data))
+  tar_target(coef_table, create_coef_table(threeway_model)),
+
+  # Karl wants this, it's for a separate model though but lets keep it together
+  tar_target(new_model_sample_size, get_sample_size())
+
+  ## Qmd stuff
+#  tar_quarto(Report, "Report.qmd"),
+ # tar_quarto(Readme, "Readme.qmd")
 )

@@ -1,5 +1,4 @@
 clean_data <- function(raw_data) {
-
   raw_data <- readxl::read_xlsx(raw_data)
   raw_data <- janitor::clean_names(raw_data)
 
@@ -48,19 +47,16 @@ clean_data <- function(raw_data) {
         "Gl-Rjs" = "rjS",
         "Gl-Xik" = "Xik",
         "Gl-Zhw" = "ZHw"
-      ))
+      )
+    )
 
   raw_data <- raw_data %>%
-    mutate(
-      cell_line = recode(
-        cell_line,
-        "Wild-Type" = "Wild-type"
-      ))
+    mutate(cell_line = recode(cell_line, "Wild-Type" = "Wild-type"))
 
 }
 
 # # Driver
-# pacman::p_load(tidyverse,targets)
+# pacman::p_load(tidyverse, targets)
 # targets::tar_load(raw_data_file)
 # raw_data_file
 # cleaned <- clean_data(raw_data_file)

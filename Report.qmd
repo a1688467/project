@@ -1,21 +1,81 @@
 ---
-title: "Report"
-format: html
+title: "IMRaD"
+format: pdf
 editor: visual
+bibliography: references.bib
 ---
 
 # Introduction
 
+The data was from an experiment that looks at the effect a novel treatment has on gene expression with saline as a placebo. Additionally there were two cell lines used, application of a growth factor with different concentration varying between 0 and 10 mg/ml and six different types of cells.
+
+Combinations of these were distributed across the 88 samples, with an even number getting either treatment, concentration of growth factor and cell line. However only cell types Xik, rjS, MFA and ZHw got the treatment while cell types Xib, cDZ, cwN and kYH got the placebo. The cell types came from either cell line and the cell line itself was evenly distributed across the treatment types. The distribution of gene expression is right-skewed with a mean of 14.3 and standard deviation of 9.76.
+
+The key research question is finding the effect the treatment has on gene expression, however the other dependent variables will also potentially effect gene expression.
+
 # Method
+
+The data was cleaned by fixing the case in the data naming, simplifying data names and clearing up data values that had varied punctuation for the same value. None of the data was missing or had ambiguous values. It was done using various tidyverse [@tidy] packages in R [@r].
+
+As the goal is to find the effect of the treatment on gene expression, rather than just predicting gene expression given treatment, regression modelling was chosen.
+
+The type of model used was a mixed-effects regression with a random intercept for the name of the cell type with gene expression as an outcome and with concentration of growth hormone, cell type, treatment type and all interactions between the three (including the three-way interaction) included as predictors. It was made using the lme4 [@me] package in R.
+
+A mixed-effects model was investigated due to hypothesizing from the EDA (@fig-fig1) that there are individual effects from the cell type. A comparison between a trivial mixed effect model and a trivial linear regression model was also done to confirm the individual effects from the cell type.
+
+The predictors were chosen by creating three models: one with only the lower order interactions concentration, cell type and treatment, one with the lower order interactions in addition to two-way interactions between concentration, cell type and treatment and one that had both the lower order interactions and the two-way interactions as well as the single three-way interaction. Each of these models was reduced using a backwards step-wise algorithm and then compared using AIC where the lowest AIC model was selected (@tbl-tab1).
+
+Models whose lower order interactions were not significant but their higher order interactions were, had to lower order interactions kept due to the principle of marginality [@894ea6d7-767b-3ede-83e3-8e1070ebb895].
 
 # Results
 
-# Discussion
+![Figure of relationship between gene expression and all of the predictors. Gene expression is on the Y-axis and concentration of growth factor is on the X-axis. Figure A is for the wild-type cell line and figure B is for the Cell-type 101 cell line. The data is then further split between the cell types. It seems that there is not one clear factor in determining gene expression.](figs/KarlsPlot.svg){#fig-fig1}
 
-# Appendix
-
-??
+@fig-fig1 shows the relationship between gene expression and all of the predictors. For the wild-type cell line, there is a clear relationship between treatment groups where activating factor 42 seems to have a large influence on gene expression. As the concentration increases, only cells treated by activating factor 42 increase their gene expression. The cell type however does not seem important. For the Cell-type 101 cell line, there is no clear relationship between the treatment types. While both placebo treated cell types have an increase in gene expression when the concentration increases, only one treated cell type increases its gene expression. Thus there is no clear effect from any individual predictor.
 
 ```{r}
-here::here()
+#| echo: false
+#| warning: false
+#| label: tbl-tab1
+#| tbl-cap: "Model 1 is the model with concentration, cell line and treatment type as predictors alone. Model 2 includes, in addition to these, two-way interactions between each of these predictors. Model 3 includes, in addition to those in Model 2, a three-way interaction between the three predictors. A lower df implies a less compelx model. A lower AIC implies a better fit."
+pacman::p_load(targets, tidyverse, lme4, gt)
+tar_load(AIC_table)
+AIC_table
+
 ```
+
+@tbl-tab1 shows that the best model for explaining gene expression is Model 3, the one that takes into account every potential interaction between the predictors as it has the lowest AIC. The next best model is Model 2 which includes the two-way interactions and lower order effects and the worst model is Model 1 which only includes the lower order effects.
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: tbl-tab2
+#| tab-cap: "Table of coefficients for the mixed-effects regression model, split between the fixed effects and random effects. Fixed effect coefficients for categorical predictors have been normalised, so only one factor for each is present in the table."
+
+tar_load(coef_table)
+coef_table
+```
+
+@tbl-tab2 shows a summary of the fixed and random effects coefficients. The random effects show the contribution to gene expression for each type of cell. The fixed effects can be interpreted in a similar way to standard linear regression. That is, the categorical predictors (cell line and treatment type) have been normalised so only one factor needs to be present in the table. For example, if one wants to look at gene expression for only treated cells, then the coefficients whose term includes placebo can be ignored. These placebo terms are only added when considering cells exposed to the placebo. Terms with concentration can be interpreted as the change in gene expression for a one unit increase in concentration. Importantly, this applies to the interaction terms as long as the factors in the term are present.
+
+Terms with p-values that are not significant but whose higher order terms were significant, were kept because of the principle of marginality (as noted previously). P-values and t-values are not applicable to the random effects, however it is still possible to take note of when the bounds include 0 as this would imply that there is no effect in the confidence interval.
+
+# Discussion
+
+From @tbl-tab1 it's clear that the best model is one that takes into account all potential interactions between predictors. Model 1 only took into account concentration as a predictor, however it was the worst scoring model. Model 2 took into account second order effects and kept treatment as a predictor after model reduction, but only due to the aforementioned principle of marginality as treatment wasn't significant alone. Model 3 being picked as the best means that not only are two-way interactions of the predictors used, but also the three-way interaction is as well (in addition to the individual effects from the cell name).
+
+This can also be seen in @fig-fig1, as it shows that there is no clear relationship between the predictors alone and the gene expression. However it does imply that there are certain combinations of the predictors that do effect gene expression. This seems to indicate that the treatment alone doesn't have a significant effect on gene expression. Additionally only the concentration of growth factor appears to have an effect, which was expected as growth factor is known to induce gene expression. Interestingly though, the treatment increases gene expression for the both types of Wild-type cells but only for one of the Cell-type 101 cells. For the Cell-type 101 cells, the treated type ZHw's gene expression does not increase at all unlike what occurs for the other three types (including for placebo cells).
+
+@tbl-tab1 and [-@tbl-tab2] all confirm this, as the lower order fixed-effect predictors of cell line and treatment type were typically not significant while the higher order terms were including the full interaction term between. Additionally it can be seen that there are individual effects due to the cell type. The only significant lower order term that had no interaction was concentration which can also be seen from @fig-fig1 with increases in concentration of growth factor correlating with increases in gene expression in many of the combinations.
+
+@tbl-tab2 quantifies the effect that the interactions between the predictors have on gene expression. Due to being an interaction model, interpretation is more complex than a simple additive one, however insights can still be divined. In the model, there are no combinations of predictors where the placebo increases the gene expression more than the treatment group. For very low concentrations placebo decreases gene expression, however it does still have an increase beyond that (especially for Cell-type 101).
+
+Increasing the concentration increases the gene expression for the treatment group, however when the placebo is used there is a very slight decrease when looking at the Wild-type cell line. The cell line Cell-type 101 has a lower gene expression for the treatment group than it does for the placebo group. The lower decrease in gene expression is due to the decrease effect of concentration being lessened for the Placebo group.
+
+Generally the interaction terms dominate the behavior of the model, due to the terms depending on concentration being multiplied by the concentration rather than just added like the categorical predictor terms.
+
+The random effects can be seen in @tbl-tab1, there is some clear symmetry between some of the cell types whose cell lines are the same. Most of the terms have bounds that don't include 0 and so there is almost certainty in the effect of the additional random intercept. Some of these effects are very large, however none of them fully negate the fixed effects intercept.
+
+This means that treatment alone can not be used to explain the effect of the change of gene expression, however in combination with the other factors it is a component. Overall, the treatment does seem to have a large effect in increasing gene expression taking this into account.
+
+# References

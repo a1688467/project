@@ -49,3 +49,10 @@ po/*~
 rsconnect/
 
 _targets
+
+Report.html
+Report.pdf
+Report_files/
+
+# This is my shit guide
+IMRaD_guide.qmd
