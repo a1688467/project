@@ -55,6 +55,19 @@ clean_data <- function(raw_data) {
 
 }
 
+## DO NOT REMOVE OR COMMENT
+# imerTest step function workaround
+#
+# As noted before, lmerTest's step uses global state
+# If I cared enough and had more time I'd submit a patch but alas
+# This are needed to ensure cleaned_data is in the global state
+# In it's own file without target as
+
+pacman::p_load(tidyverse)
+raw_data_file = "raw-data/karl-data-4-3-24.xlsx"
+cleaned_data <-  clean_data(raw_data_file)
+Sys.setenv(TAR_WARN = "false") # Shut targets up
+
 # # Driver
 # pacman::p_load(tidyverse, targets)
 # targets::tar_load(raw_data_file)

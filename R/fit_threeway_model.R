@@ -12,11 +12,6 @@ fit_threeway_model <- function(cleaned_data) {
 }
 
 # Driver
-# KEEP UNCOMMENTED
-# As noted before, lmerTest's step uses global state
-# If I cared enough and had more time I'd submit a patch but alas
-# These two lines are needed to ensure cleaned_data is in the global state
-Sys.setenv(TAR_WARN = "false")
-pacman::p_load(tidyverse, targets, gglm, lme4)
-tar_load(cleaned_data)
+# pacman::p_load(tidyverse, targets, gglm, lme4)
+# tar_load(cleaned_data)
 # M2 <- fit_threeway_model(cleaned_data)
