@@ -5,7 +5,7 @@ fit_twoway_model <- function(cleaned_data) {
     data = cleaned_data
   )
   M_twoway_final <- get_model(step(M_twoway))
-  return (M_twoway_final)
+  return (lme4::lmer(M_twoway_final, data = cleaned_data))
 
 }
 
