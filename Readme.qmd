@@ -8,94 +8,140 @@ editor: visual
 
 This project uses targets, xxxx so ensure you have the requirements installed already.
 
-## TODO
+-   Is all svg good
 
--   All Karl work (Check with Jono the correctness)
+-   Min deps
 
--   R vs r-code dir
+-   Plot naming
 
--   Check naming
+-   Check mixed up install
 
--   Add the here::here() code to this and report
-
--   Fix treatment/Treatment
-
--   Render this and report
+-   Check my notes
 
 # Initial EDA
 
-xxx
+This was all part of Karl's requests
 
-Many variations of models were done, but the two key ones were interation models and simple addetive ones. Most we're great but the three best models here were the following:
-
-1.  gene_expression \~ cell_line + treatment + name + conc + gene_expression
-
-2.  gene_expression \~ cell_line + treatment + conc + gene_expression + (name\*conc)
-
-3.  gene_expression \~ cell_line + treatment + conc + gene_expression
+No data was missing and we've cleaned up naming and stuff:
 
 ```{r}
-tar_load(simple_models)
-AIC(simple_models[[1]], simple_models[[2]], simple_models[[3]])
-#Do this programatically
-
+pacman::p_load(tidyverse, targets, lme4, lmerTest, mixedup, gt, skimr)
+tar_load(cleaned_data)
+skim(cleaned_data)
 ```
 
-We can see that the addetive model with the name/concentration interactive terms has the lowest AIC. As seen in the EDA we expected this, so let's check assumptions and p-values:
+Let's look at the response:
+
+![](figs/gene.svg)
+
+We can see that it's quite right skewed, so a transform might be needed.
+
+Now lets look at some combos, Karl wants to see if the treatment has an effect on gene expression and there's a bunch of other potential dependent variables:
+
+Most aren't interesting or show no clear relationships (Celltype and cellline are related which makes things weirder) but here's a few that are good:
+
+![](figs/geneVsConcByName.svg)
+
+This shows that there are potential individual effects per name!
+
+![](figs/geneVsConcByCell.svg)
+
+This shows that it's not just the cell line (As there's no pattern), but the actual type!![](figs/geneVsConcByTreament.svg)
+
+Here we see that it appears that treatment alone does not have a significant influence on gene expression with concentration.
+
+![](figs/geneVsname.svg)
+
+Name and gene expression alone certainly have individual effects
+
+![](figs/geneVsTreament.svg)
+
+We see here that there is overlap in the IQR between the two which does indicate there might not be a significant difference alone.![](figs/geneVsTreatmentByCell.svg)
+
+We see that treatment and cell-line have a strange interaction, wild-type loves the treatment but cell-type 101 doesn't care
+
+Karl made us create this plot and it's actually the best at visualising stuff:
+
+![](figs/interactionPlot.svg)
+
+That there is defs individual effects coming from the name of the cell-line. Additionally for many of the for the wild-type, there is a clear relationship between treatment and gene-expression which shows there might be a three-way interaction.
+
+# Modelling
+
+We see from that deffs individual effects as well as lots of possible interaction (including three-way interaction) and let's use see if a mixed-effects model works since experimentally it makes sense. We'll start with a simple no interaction model and use ranova to see if the random intercept is useful:
 
 ```{r}
-simple_model <- simple_models[[2]]
-summary(simple_model)
-gglm(simple_model)
+base_model <- lme4::lmer(gene_expression ~ conc+cell_line+treatment+(1|name), data = cleaned_data)
+ranova(model = base_model) 
 ```
 
-Not great, but it's not the worst. A worry is all the warnings we are getting and the lack of significance (especially regarding concentration). Another alternative to try and see if we get an improvement is a mixed-effects model since it's expected that name is a separate level (the model with all interaction effects was a hot mess of errors).
+We can see from this that the random intercept is important, there are individual effects.
+
+So let's start with a threeway interaction model with a random intercept for name and see if it can be reduced using step! Importantly, we need to make the difficult decisions around lower order effects if they're not significant but the higher order ones are. Due to the principle of marginality and the potential to induce bias then I'll be likely keeping non-significant terms in.
+
+Again, we use step to find the best model from our threeway interaction, by default it's backwards so it's removing terms
+
+```{r}
+tar_load(threeway_model)
+mixedup::summarise_model(threeway_model)
+```
+
+As seen in here, we keep the 3-way interaction coefficient. However I'm worried about the insignificance of the lower order terms. Let's do a model without the 3-way interaction, again using backwards steps to remove coefficients:
+
+```{r}
+tar_load(twoway_model)
+mixedup::summarise_model(twoway_model)
+```
+
+Here treatment is not significant. While I doubt it's actually better, let's try a no interaction model.
+
+```{r}
+tar_load(simple_model)
+mixedup::summarise_model(simple_model)
+```
+
+This has actually removed treatment fully, leaving only concentration. This doesn't seem correct since we clearly saw the interaction was significant.
+
+Let's compare the three using AIC/ANOVA:
+
+```{r}
+anova(simple_model, twoway_model, threeway_model, refit=FALSE)
+tar_load(AIC_table)
+AIC_table
+```
+
+AIC wants the three-way interaction model and the anova rules out the simple model (as we expected!) while also picking the three-way over the two-way.
+
+So let's stick with the three way, it's AIC is quite a bit lower although explaining the interaction between treatment, concentration and cell_line will be annoying (the two way model was much simpler as it didn't even include the cell_line! Although the plot does show that there is some effect from this.
 
 # Final model
 
-We see from express vs conc grouped by name that there's deffs individual effects and we aren't seeing significance in the lowest AIC model from before so let's see if a mixed-effects model works since experimentally it makes sense
-
 ```{r}
-tar_load(simple_fitted_model)
-summary(simple_fitted_model)
-gglm(simple_fitted_model)
-
+tar_load(coef_table)
+coef_table
 ```
 
-This xxx
+We need to check the assumptions so lets also do that:
 
-Let's check for significance:
+![](figs/assumptions_model.svg)
 
-```{r}
-tar_load(pvalues_simple)
+The reiduals vs fitted are not great
 
-print(pvalues_simple)
-```
+The QQ is good for the middle values which might be the issue
 
-NOT all signif and assumptiosn suck due to non-linearity
+The scale location plot is confusing, but
 
-Let's try to transform the data by taking the log of gene expression and log(1+conc) since conc sometimes is equal to 0. This looks like:
+## Sample size for new data/model
 
-[***INSERT TRANSFORMED EDA***]{.underline}
-
-This looks good
-
-This gives:
+Karl asked us for a sample size calculation for some new data and a new model for a publication:
 
 ```{r}
-tar_load(fitted_model)
-summary(fitted_model)
-gglm(fitted_model)
+tar_load(new_model_sample_size)
+new_model_sample_size
 ```
 
-Which looks a lot better
+# Appendix
 
 ```{r}
-tar_load(pvalues)
-
-print(pvalues)
+here::here()
 ```
-
-Significant!
-
-# Better plots

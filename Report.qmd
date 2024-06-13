@@ -1,6 +1,6 @@
 ---
 title: "IMRaD"
-format: pdf
+format: html
 editor: visual
 bibliography: references.bib
 ---
