@@ -1,10 +1,14 @@
+#
+# Create the AIC table for the three models
+# Best has the lowest AIC
+# Could generalise for any number of models but not worth it in this case
+#
 create_AIC_table <- function(simple_model,
                              twoway_model,
                              threeway_model) {
   `Oneway model` <- simple_model
   `Twoway model` <- twoway_model
   `Threeway model` <- threeway_model
-
 
   table_model <- AIC(simple_model, twoway_model, threeway_model) %>% as_tibble(rownames = "Model") %>%
     mutate(
@@ -14,13 +18,16 @@ create_AIC_table <- function(simple_model,
         "twoway_model" = "Model 2",
         "threeway_model" = "Model 3"
       )
-    ) %>% gt %>% tab_header(title = "Comparison of models by their AIC and df") %>% cols_label(
+    ) %>%
+    gt %>%
+    tab_header(title = "Comparison of models by their AIC and df") %>%
+    cols_label(
       Model = md("**Model**"),
       df = md("**df**"),
       AIC = md("**AIC**")
-    ) #%>% gtsave(here::here("figs/model_comp."))
+    ) %>%
+    fmt_number(columns = 3, decimals = 3)
 
-  table_model %>%  fmt_number(columns = 3, decimals = 3)
   return(table_model)
 }
 

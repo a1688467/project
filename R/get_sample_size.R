@@ -1,11 +1,34 @@
+#
+# Generate minimum sample size for Karl's new data
+# NOT for the model we're using
+#
 get_sample_size <- function() {
-  # TODO Make all bounds and turn into table
   r2 <- 0.1
+  ess <- pwr::cohen.ES("f2", "small")$effect.size
+  esm <- pwr::cohen.ES("f2", "medium")$effect.size
+  esl <- pwr::cohen.ES("f2", "large")$effect.size
+
+  # Not bothering with a map for such a small number of effect sizes
+  sample_sizes <- tibble(
+    `Effect sizes` = c(ess, r2, esm, esl),
+    `Min sample size` = c(
+      get_sample_size_from_effect_size(ess),
+      get_sample_size_from_effect_size(r2),
+      get_sample_size_from_effect_size(esm),
+      get_sample_size_from_effect_size(esl)
+    )
+  )
+  # TODO Make into table if Karl needs later
+  return(sample_sizes)
+}
+
+# Helper function to actually find the sizes
+get_sample_size_from_effect_size <- function(effect_size) {
   coef <- 5 # Wrong?
   power <- 0.9
   sl <- 0.05
   v <- pwr.f2.test(
-    f2 = r2,
+    f2 = effect_size,
     u = coef,
     power = power,
     sig.level = sl
@@ -15,6 +38,6 @@ get_sample_size <- function() {
 }
 
 # Driver
-# pacman::p_load(pwr)
-# ss <- get_sample_size()
-# ss
+#pacman::p_load(pwr)
+#ss <- get_sample_size()
+#ss

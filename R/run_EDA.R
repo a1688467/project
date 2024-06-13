@@ -1,3 +1,9 @@
+#
+# Generate and save a compilation of bad plots
+# Try to capture all combinations
+# Defs smarter ways
+#
+
 run_EDA <- function(cleaned_data) {
   # Just the basic EDA, see Karls plot for the best picture
 

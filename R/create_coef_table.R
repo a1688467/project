@@ -1,13 +1,12 @@
-create_coef_table <- function(threeway_model) {
-  # Fix this
-  model <- threeway_model
-
-
-  ## START CODE
-
-  fixed_eff <- mixedup::extract_fixed_effects(model)
-  random_eff_with_int <- mixedup::extract_random_coefs(threeway_model)
-  random_eff_without_int <- mixedup::extract_random_effects(threeway_model)
+#
+# Create the table of coefficients
+# VERY delicate
+#
+#
+create_coef_table <- function(mixed_model) {
+  fixed_eff <- mixedup::extract_fixed_effects(mixed_model)
+  random_eff_with_int <- mixedup::extract_random_coefs(mixed_model)
+  random_eff_without_int <- mixedup::extract_random_effects(mixed_model)
 
   fixed_eff <- fixed_eff %>% mutate(
     term = recode(
@@ -81,7 +80,7 @@ create_coef_table <- function(threeway_model) {
 }
 
 # Driver
-#pacman::p_load(targets, tidyverse, lme4, gt, lmerTest)
-
-#tar_load(threeway_model)
-#tab <- create_coef_table(threeway_model)
+pacman::p_load(targets, tidyverse, lme4, gt, lmerTest)
+tar_load(threeway_model)
+tab <- create_coef_table(threeway_model)
+tab
