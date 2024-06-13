@@ -1,38 +1,47 @@
 library(targets)
 library(tarchetypes) # Load other packages as needed.
+
 pacman::p_load(
   tidyverse,
-  harrypotter,
   gt,
   quarto,
   gglm,
-  webshot2,
-  janitor,
-  here,
-  patchwork,
+  pwr,
   lme4,
-  gt,
   lmerTest,
-  mixedup,
-  pwr
+  ggrepel,
+  patchwork,
+  here,
+  janitor,
+  # Please work on jono's mac
+  svglite,
+  harrypotter,
+  assertthat
 )
-pacman::p_load(showtext, ggrepel)
-remotes::install_github('m-clark/mixedup')
+
+withr::with_envvar(
+  c(R_REMOTES_NO_ERRORS_FROM_WARNINGS = "true"),
+  remotes::install_github('m-clark/mixedup')
+)
 
 tar_option_set(
   packages = c(
     "tidyverse",
-    "harrypotter",
     "gt",
     "quarto",
     "gglm",
-    "webshot2",
-    "janitor",
+    "pwr",
     "lme4",
     "lmerTest",
+    "ggrepel",
+    "patchwork",
+    "here",
+    "janitor",
+    "svglite",
+    "harrypotter",
     "mixedup",
-    "pwr"
-  ) # Packages that your targets need for their tasks.
+    "assertthat"
+  )
 )
 
 tar_source()
@@ -41,6 +50,7 @@ list(
   # IMPORTANT
   # If you change these two lines, i.e. for new data then make sure you change
   # clean_data's code bellow the function
+  # Since lmerTest's step function uses global state
   tar_file(raw_data_file, "raw-data/karl-data-4-3-24.xlsx"),
   tar_target(cleaned_data, clean_data(raw_data_file)),
 
@@ -64,9 +74,10 @@ list(
   tar_target(coef_table, create_coef_table(threeway_model)),
 
   # Karl wants this, it's for a separate model though but lets keep it together
-  tar_target(new_model_sample_size, get_sample_size()),
+  tar_target(new_model_sample_size, get_sample_size())
 
-  ## Qmd stuff
-  tar_quarto(Report, "Report.qmd"),
-  tar_quarto(Readme, "Readme.qmd")
+  ## TODO qmd stuff only works intermittently on Ubuntu 24.04
+  # Add comma to above target if testing this! Targets has bad error messages
+  #tar_quarto(Report, "Report.qmd"),
+  #tar_quarto(Readme, "Readme.qmd")
 )
