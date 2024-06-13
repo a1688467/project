@@ -29,7 +29,7 @@ Models whose lower order interactions were not significant but their higher orde
 
 # Results
 
-![Figure of relationship between gene expression and all of the predictors. Gene expression is on the Y-axis and concentration of growth factor is on the X-axis. Figure A is for the wild-type cell line and figure B is for the Cell-type 101 cell line. The data is then further split between the cell types. It seems that there is not one clear factor in determining gene expression.](figs/KarlsPlot.svg){#fig-fig1}
+![Figure of relationship between gene expression and all of the predictors. Gene expression is on the Y-axis and concentration of growth factor is on the X-axis. Figure A is for the wild-type cell line and figure B is for the Cell-type 101 cell line. The data is then further split between the cell types. It seems that there is not one clear factor in determining gene expression.](figs/interactionPlot.svg){#fig-fig1}
 
 @fig-fig1 shows the relationship between gene expression and all of the predictors. For the wild-type cell line, there is a clear relationship between treatment groups where activating factor 42 seems to have a large influence on gene expression. As the concentration increases, only cells treated by activating factor 42 increase their gene expression. The cell type however does not seem important. For the Cell-type 101 cell line, there is no clear relationship between the treatment types. While both placebo treated cell types have an increase in gene expression when the concentration increases, only one treated cell type increases its gene expression. Thus there is no clear effect from any individual predictor.
 

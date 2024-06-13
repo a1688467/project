@@ -1,4 +1,10 @@
-create_karls_plot <- function(raw_data) {
+#
+# Create interaction plot
+# Origionally requested by Karl
+# We also use this for the report
+#
+#
+create_interaction_plot <- function(raw_data) {
   col_pal <- c("#78a8d1", "#d5bf98")
   #tiff(filename = "plot.tiff", width = 9, height = 6, units = "in", res = 500)
 
@@ -65,7 +71,7 @@ create_karls_plot <- function(raw_data) {
 
   cc <- combined + plot_layout(guides = "collect") + labs(col = "Treatment") +  scale_fill_manual(values = col_pal) + scale_color_manual(values = col_pal)
 
-  ggsave(filename = here::here("figs/KarlsPlot.svg"),
+  ggsave(filename = here::here("figs/interactionPlot.svg"),
          plot = cc)
 
 }
@@ -74,4 +80,4 @@ create_karls_plot <- function(raw_data) {
 # # Driver
 # pacman::p_load(tidyverse, targets, showtext, ggrepel, patchwork, svglite)
 # tar_load(cleaned_data)
-# create_karls_plot(cleaned_data)
+# create_interaction_plot(cleaned_data)
