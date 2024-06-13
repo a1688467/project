@@ -4,7 +4,6 @@
 # Look complicated but mostly renaming/rearranging
 #
 create_coef_table <- function(mixed_model) {
-
   # Extract and format the fixed effects
   fixed_eff <- mixedup::extract_fixed_effects(mixed_model)
   fixed_eff <- fixed_eff %>% mutate(

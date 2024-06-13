@@ -18,7 +18,6 @@ get_sample_size <- function() {
       get_sample_size_from_effect_size(esl)
     )
   )
-  # TODO Make into table if Karl needs later
   return(sample_sizes)
 }
 

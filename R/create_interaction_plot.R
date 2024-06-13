@@ -1,12 +1,12 @@
 #
 # Create interaction plot
-# Origionally requested by Karl
+# Originally requested by Karl
 # We also use this for the report
 # geom_label_repel code is horrible and mostly based of trial and error
 # to get it to look the same as Jono's
 #
 create_interaction_plot <- function(raw_data) {
-  # Colours taken from Jono's plot
+  # Colour's taken from Jono's plot
   col_pal <- c("#78a8d1", "#d5bf98")
 
   # Wild-type plot

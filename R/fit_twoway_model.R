@@ -16,7 +16,6 @@ fit_twoway_model <- function(cleaned_data) {
 
 }
 
-
 # Driver
 # pacman::p_load(tidyverse,targets, gglm, lme4)
 # tar_load(cleaned_data)

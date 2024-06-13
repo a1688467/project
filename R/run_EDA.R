@@ -3,9 +3,9 @@
 # Try to capture all combinations
 # Defs smarter ways
 #
-
 run_EDA <- function(cleaned_data) {
   # Just the basic EDA, see Karls plot for the best picture
+  # No particular order
 
   cleaned_data %>% ggplot(aes(x = gene_expression)) + geom_histogram()
   ggsave(here::here("figs/gene.svg"))
