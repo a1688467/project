@@ -18,7 +18,7 @@ list(
 
   # Both part of Karls requests
   tar_target(eda, run_EDA(cleaned_data)),
-  tar_target(karls_plot, create_karls_plot(cleaned_data)),
+  tar_target(interaction_plot, create_interaction_plot(cleaned_data)),
 
   # All interaction models
   tar_target(simple_model, fit_simple_model(cleaned_data)),
@@ -28,7 +28,7 @@ list(
   # Validate the best
   tar_target(AIC_table, create_AIC_table(simple_model, twoway_model, threeway_model)),
 
-  # threeway is the best
+  # three-way is the best
   tar_target(checked_model, check_model(threeway_model, cleaned_data)),
   tar_target(coef_table, create_coef_table(threeway_model)),
 
