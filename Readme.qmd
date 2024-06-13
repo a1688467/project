@@ -6,15 +6,7 @@ editor: visual
 
 # Running the project
 
-This project uses targets, xxxx so ensure you have the requirements installed already.
-
--   Is all svg good
-
--   Min deps
-
--   Plot naming
-
--   Check mixed up install
+This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Run the makefile before you do anything here.
 
 -   Check my notes
 

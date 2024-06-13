@@ -38,7 +38,7 @@ Models whose lower order interactions were not significant but their higher orde
 #| warning: false
 #| label: tbl-tab1
 #| tbl-cap: "Model 1 is the model with concentration, cell line and treatment type as predictors alone. Model 2 includes, in addition to these, two-way interactions between each of these predictors. Model 3 includes, in addition to those in Model 2, a three-way interaction between the three predictors. A lower df implies a less compelx model. A lower AIC implies a better fit."
-pacman::p_load(targets, tidyverse, lme4, gt)
+pacman::p_load(tidyverse, targets, gt)
 tar_load(AIC_table)
 AIC_table
 
