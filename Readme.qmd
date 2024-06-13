@@ -6,7 +6,7 @@ editor: visual
 
 # Running the project
 
-This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Run the makefile before you do anything here.
+This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Run the makefile before you do anything here. Render this again too! And the report
 
 -   Check my notes
 
