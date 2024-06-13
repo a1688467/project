@@ -74,10 +74,10 @@ list(
   tar_target(coef_table, create_coef_table(threeway_model)),
 
   # Karl wants this, it's for a separate model though but lets keep it together
-  tar_target(new_model_sample_size, get_sample_size())
+  tar_target(new_model_sample_size, get_sample_size()),
 
   ## TODO qmd stuff only works intermittently on Ubuntu 24.04
   # Add comma to above target if testing this! Targets has bad error messages
-  #tar_quarto(Report, "Report.qmd"),
-  #tar_quarto(Readme, "Readme.qmd")
+  tar_quarto(Report, "Report.qmd"),
+  tar_quarto(Readme, "Readme.qmd")
 )
