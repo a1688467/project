@@ -6,13 +6,15 @@ editor: visual
 
 # Running the project
 
-This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Run the makefile before you do anything here. Render this again too! And the report
+-   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already.
 
--   Check my notes
+-   Run the makefile before you do anything here.
+
+-   Render this again too! And the report! Often targets plays up
 
 # Initial EDA
 
-This was all part of Karl's requests
+This was all part of Karl's requests.
 
 No data was missing and we've cleaned up naming and stuff:
 
@@ -30,7 +32,7 @@ We can see that it's quite right skewed, so a transform might be needed.
 
 Now lets look at some combos, Karl wants to see if the treatment has an effect on gene expression and there's a bunch of other potential dependent variables:
 
-Most aren't interesting or show no clear relationships (Celltype and cellline are related which makes things weirder) but here's a few that are good:
+Most aren't interesting or show no clear relationships (Cell-type and cell-line are related which makes things weirder) but here's a few that are good:
 
 ![](figs/geneVsConcByName.svg)
 
@@ -44,7 +46,7 @@ Here we see that it appears that treatment alone does not have a significant inf
 
 ![](figs/geneVsname.svg)
 
-Name and gene expression alone certainly have individual effects
+Name and gene expression alone certainly have individual effects which is good
 
 ![](figs/geneVsTreament.svg)
 
@@ -52,15 +54,17 @@ We see here that there is overlap in the IQR between the two which does indicate
 
 We see that treatment and cell-line have a strange interaction, wild-type loves the treatment but cell-type 101 doesn't care
 
+## Karl's plot/interaction plot
+
 Karl made us create this plot and it's actually the best at visualising stuff:
 
 ![](figs/interactionPlot.svg)
 
-That there is defs individual effects coming from the name of the cell-line. Additionally for many of the for the wild-type, there is a clear relationship between treatment and gene-expression which shows there might be a three-way interaction.
+That there is certainly individual effects coming from the name of the cell-line. Additionally for many of the wild-type, there is a clear relationship between treatment and gene-expression which shows there might be a three-way interaction.
 
 # Modelling
 
-We see from that deffs individual effects as well as lots of possible interaction (including three-way interaction) and let's use see if a mixed-effects model works since experimentally it makes sense. We'll start with a simple no interaction model and use ranova to see if the random intercept is useful:
+We see from that there's probably individual effects as well as lots of possible interaction (including three-way interaction) and let's use see if a mixed-effects model works since experimentally it makes sense. We'll start with a simple no interaction model and use ranova to see if the random intercept is useful (force a lme4 model since lmerTest takes over the default lmer function and it's only useful for some stuff):
 
 ```{r}
 base_model <- lme4::lmer(gene_expression ~ conc+cell_line+treatment+(1|name), data = cleaned_data)
@@ -117,11 +121,15 @@ We need to check the assumptions so lets also do that:
 
 ![](figs/assumptions_model.svg)
 
-The reiduals vs fitted are not great
+The residuals vs fitted are not great
 
 The QQ is good for the middle values which might be the issue
 
-The scale location plot is confusing, but
+The scale location plot is confusing, but if we ignore the outlines it's passable
+
+Residual vs leverage is fine, vertical lines are due to factor levels rather than continous predictors
+
+We could do more assumptions checking but I'm happy enough with this
 
 ## Sample size for new data/model
 
