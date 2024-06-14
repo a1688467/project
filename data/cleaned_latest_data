@@ -1,0 +1,89 @@
+cell_line treatment name conc gene_expression Treatment
+Wild-type Placebo XIb 0 5.05 Placebo
+Wild-type Placebo cDZ 0 5.92 Placebo
+Wild-type Placebo XIb 1 4.15 Placebo
+Wild-type Placebo cDZ 1 3.34 Placebo
+Wild-type Placebo XIb 2 6.67 Placebo
+Wild-type Placebo cDZ 2 5.54 Placebo
+Wild-type Placebo XIb 3 6.35 Placebo
+Wild-type Placebo cDZ 3 4.89 Placebo
+Wild-type Placebo XIb 4 5.48 Placebo
+Wild-type Placebo cDZ 4 3.44 Placebo
+Wild-type Placebo XIb 5 4.74 Placebo
+Wild-type Placebo cDZ 5 5.55 Placebo
+Wild-type Placebo XIb 6 2.58 Placebo
+Wild-type Placebo cDZ 6 4.63 Placebo
+Wild-type Placebo XIb 7 2.97 Placebo
+Wild-type Placebo cDZ 7 4.29 Placebo
+Wild-type Placebo XIb 8 3.68 Placebo
+Wild-type Placebo cDZ 8 5.7 Placebo
+Wild-type Placebo XIb 9 3.46 Placebo
+Wild-type Placebo cDZ 9 4.77 Placebo
+Wild-type Placebo XIb 10 4.07 Placebo
+Wild-type Placebo cDZ 10 3.77 Placebo
+Wild-type "Activating factor 42" rjS 0 9.32 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 0 10.22 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 1 10.35 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 1 13.25 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 2 13.04 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 2 18.7 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 3 12.68 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 3 20.32 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 4 15.53 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 4 24.33 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 5 17.17 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 5 29.07 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 6 17.31 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 6 29.83 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 7 18.54 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 7 33.04 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 8 19.84 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 8 36.1 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 9 22.74 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 9 40.77 "Activating factor 42"
+Wild-type "Activating factor 42" rjS 10 24.17 "Activating factor 42"
+Wild-type "Activating factor 42" Xik 10 44.44 "Activating factor 42"
+"Cell-Type 101" Placebo cwN 0 7.75 Placebo
+"Cell-Type 101" Placebo kYH 0 7.15 Placebo
+"Cell-Type 101" Placebo cwN 1 8.53 Placebo
+"Cell-Type 101" Placebo kYH 1 7.76 Placebo
+"Cell-Type 101" Placebo cwN 2 11.47 Placebo
+"Cell-Type 101" Placebo kYH 2 8.75 Placebo
+"Cell-Type 101" Placebo cwN 3 9.66 Placebo
+"Cell-Type 101" Placebo kYH 3 10.89 Placebo
+"Cell-Type 101" Placebo cwN 4 13.98 Placebo
+"Cell-Type 101" Placebo kYH 4 9.35 Placebo
+"Cell-Type 101" Placebo cwN 5 16.45 Placebo
+"Cell-Type 101" Placebo kYH 5 11.55 Placebo
+"Cell-Type 101" Placebo cwN 6 17.45 Placebo
+"Cell-Type 101" Placebo kYH 6 14.13 Placebo
+"Cell-Type 101" Placebo cwN 7 19.18 Placebo
+"Cell-Type 101" Placebo kYH 7 15.03 Placebo
+"Cell-Type 101" Placebo cwN 8 22.24 Placebo
+"Cell-Type 101" Placebo kYH 8 17.32 Placebo
+"Cell-Type 101" Placebo cwN 9 21.61 Placebo
+"Cell-Type 101" Placebo kYH 9 17.95 Placebo
+"Cell-Type 101" Placebo cwN 10 23.24 Placebo
+"Cell-Type 101" Placebo kYH 10 20.21 Placebo
+"Cell-Type 101" "Activating factor 42" ZHw 0 11.4 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 0 8.12 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 1 10.41 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 1 13.83 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 2 9.8 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 2 15.32 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 3 9.46 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 3 19.25 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 4 8.21 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 4 20.76 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 5 8.46 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 5 24.82 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 6 9.44 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 6 24.92 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 7 7.45 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 7 28.66 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 8 8.31 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 8 33.84 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 9 10.27 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 9 35.98 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" ZHw 10 8.83 "Activating factor 42"
+"Cell-Type 101" "Activating factor 42" MFA 10 38.52 "Activating factor 42"

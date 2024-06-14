@@ -35,6 +35,8 @@ clean_data <- function(raw_data) {
     ) %>%
     mutate(cell_line = recode(cell_line, "Wild-Type" = "Wild-type"))
 
+  write_delim(raw_data, here::here("data/cleaned_latest_data"))
+
   return(raw_data)
 }
 
