@@ -12,11 +12,13 @@ This readme doesn't contain the full analysis or indepth looks at interesting st
 
 # Running the project
 
--   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Rstudio is handy as a project file is provided. Additionally a chromium based browser is needed for the table generation.
+-   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Additionally a chromium based browser is needed for the table generation.
 
--   Run the makefile before you do anything else.
+-   Run the makefile in Rstudio using the build command before you do anything else.
 
--   Render this again too! And the report! Often targets plays up and needs the quatro parts commented out if it errors out about not finding the quatro binary.
+-   If you run the makefile outside of Rstudio, ensure you have quatro in your path!
+
+-   Render this again too! And the report! (Often targets plays up and needs the quatro parts commented out if it errors out about not finding the quatro binary).
 
 -   This Readme won't show the executed code parts on Github, instead download and build the project then view the rendered files (this also applies to the report).
 
