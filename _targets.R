@@ -70,7 +70,7 @@ list(
   ),
 
   # three-way is the best
-  tar_target(checked_model, check_model(threeway_model, cleaned_data)),
+  tar_target(checked_model, check_model(threeway_model)),
   tar_target(coef_table, create_coef_table(threeway_model)),
 
   # Karl wants this, it's for a separate model though but lets keep it together

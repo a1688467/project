@@ -1,7 +1,7 @@
 #
-# Save the assumptions plots of the final model
+# Save the assumption plots of a given model
 #
-check_model <- function(model, data) {
+check_model <- function(model) {
   gglm(model)
   ggsave(here::here("figs/assumptions_model.svg"))
 }
