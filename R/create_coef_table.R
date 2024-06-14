@@ -69,7 +69,7 @@ create_coef_table <- function(mixed_model) {
 }
 
 # Driver
-pacman::p_load(targets, tidyverse, lme4, gt, lmerTest)
-tar_load(threeway_model)
-tab <- create_coef_table(threeway_model)
-tab
+# pacman::p_load(targets, tidyverse, lme4, gt, lmerTest)
+# tar_load(threeway_model)
+# tab <- create_coef_table(threeway_model)
+# tab
