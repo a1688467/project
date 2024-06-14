@@ -12,6 +12,8 @@ editor: visual
 
 -   Render this again too! And the report! Often targets plays up
 
+-   This Readme won't show the executed code parts on Github (i.e. the tables) since I've not bothered to save them (since it often messes up formatting), instead download and build the project then view the rendered files
+
 # Initial EDA
 
 This was all part of Karl's requests.
