@@ -8,11 +8,11 @@ editor: visual
 
 -   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already.
 
--   Run the makefile before you do anything here.
+-   Run the makefile before you do anything else.
 
--   Render this again too! And the report! Often targets plays up
+-   Render this again too! And the report! Often targets plays up and needs the quatro parts commented out if it errors out about not finding the quatro binary.
 
--   This Readme won't show the executed code parts on Github (i.e. the tables) since I've not bothered to save them (since it often messes up formatting), instead download and build the project then view the rendered files
+-   This Readme won't show the executed code parts on Github (i.e. the tables) since I've not bothered to save them (since it often messes up formatting), instead download and build the project then view the rendered files (this also applies to the report).
 
 # Initial EDA
 
