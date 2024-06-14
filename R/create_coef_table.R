@@ -48,7 +48,9 @@ create_coef_table <- function(mixed_model) {
     tab_header(title = "Summary of fixed and random effects coefficients") %>%
     tab_spanner(label = md("**Bounds**"),
                 columns = c("lower", "upper")) %>%
-    tab_footnote(footnote = "Note that the lower-bound is 2.5% and upper-bound is 97.5%", locations = cells_column_spanners(spanners = md("**Bounds**"))) %>% cols_label(
+    tab_footnote(footnote = "Note that the lower-bound is 2.5% and upper-bound is 97.5%",
+                 locations = cells_column_spanners(spanners = md("**Bounds**"))) %>%
+    cols_label(
       term = md("**Term**"),
       value = md("**Value**"),
       se = md("**Std. Err.**"),
@@ -58,7 +60,8 @@ create_coef_table <- function(mixed_model) {
       `p-value` = md("**p-value**")
     ) %>%
     tab_style(cell_fill(color = "gray85"), cells_row_groups(1)) %>% tab_style(cell_fill(color = "gray85"), cells_row_groups(2)) %>%
-    tab_footnote(footnote = "These values do not include the intercept and have no applicable p-value or t-value", cells_row_groups("Random effects"))
+    tab_footnote(footnote = "These values do not include the intercept and have no applicable p-value or t-value",
+                 cells_row_groups("Random effects"))
 
   return(co_table)
 }

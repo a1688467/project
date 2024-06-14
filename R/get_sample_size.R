@@ -3,7 +3,10 @@
 # NOT for the model we're using
 #
 get_sample_size <- function() {
+  # From Karl
   r2 <- 0.1
+
+  # Standard ES
   ess <- pwr::cohen.ES("f2", "small")$effect.size
   esm <- pwr::cohen.ES("f2", "medium")$effect.size
   esl <- pwr::cohen.ES("f2", "large")$effect.size
@@ -22,8 +25,9 @@ get_sample_size <- function() {
 }
 
 # Helper function to actually find the sizes
+# Using the pwr documentation
 get_sample_size_from_effect_size <- function(effect_size) {
-  coef <- 5 # Wrong?
+  coef <- 5 # Wrong? # coef
   power <- 0.9
   sl <- 0.05
   v <- pwr.f2.test(
