@@ -10,7 +10,7 @@ create_AIC_table <- function(simple_model,
   `Twoway model` <- twoway_model
   `Threeway model` <- threeway_model
 
-  table_model <- AIC(simple_model, twoway_model, threeway_model) %>% as_tibble(rownames = "Model") %>%
+  AIC_table <- AIC(simple_model, twoway_model, threeway_model) %>% as_tibble(rownames = "Model") %>%
     mutate(
       Model = recode(
         Model,
@@ -28,7 +28,9 @@ create_AIC_table <- function(simple_model,
     ) %>%
     fmt_number(columns = 3, decimals = 3)
 
-  return(table_model)
+  gtsave(AIC_table, here::here("tabs/AIC_table.png"))
+
+  return(AIC_table)
 }
 
 # Driver

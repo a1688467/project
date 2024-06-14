@@ -12,13 +12,13 @@ This readme doesn't contain the full analysis or indepth looks at interesting st
 
 # Running the project
 
--   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Rstudio is handy as a project file is provided.
+-   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Rstudio is handy as a project file is provided. Additionally a chromium based browser is needed for the table generation.
 
 -   Run the makefile before you do anything else.
 
 -   Render this again too! And the report! Often targets plays up and needs the quatro parts commented out if it errors out about not finding the quatro binary.
 
--   This Readme won't show the executed code parts on Github (i.e. the tables) since I've not bothered to save them (since it often messes up formatting), instead download and build the project then view the rendered files (this also applies to the report).
+-   This Readme won't show the executed code parts on Github, instead download and build the project then view the rendered files (this also applies to the report).
 
 # Initial EDA
 
@@ -110,9 +110,9 @@ Let's compare the three using AIC/ANOVA:
 
 ```{r}
 anova(simple_model, twoway_model, threeway_model, refit=FALSE)
-tar_load(AIC_table)
-AIC_table
 ```
+
+![](tabs/AIC_table.png)
 
 AIC wants the three-way interaction model and the anova rules out the simple model (as we expected!) while also picking the three-way over the two-way.
 
@@ -122,10 +122,9 @@ Importantly, the imerTest package often uses global state so to work with target
 
 # Final model
 
-```{r}
-tar_load(coef_table)
-coef_table
-```
+Coefficients include lots of non-significant lower order ones:
+
+![](tabs/coef_table.png)
 
 We need to check the assumptions so lets also do that:
 
@@ -155,4 +154,3 @@ new_model_sample_size
 ```{r}
 here::here()
 ```
-

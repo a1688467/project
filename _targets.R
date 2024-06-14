@@ -13,10 +13,10 @@ pacman::p_load(
   patchwork,
   here,
   janitor,
-  # Please work on jono's mac
-  svglite,
+  svglite, # Please work on jono's mac
   harrypotter,
-  assertthat
+  assertthat,
+  webshot2 # Please work on Jono's mac
 )
 
 withr::with_envvar(
@@ -40,7 +40,8 @@ tar_option_set(
     "svglite",
     "harrypotter",
     "mixedup",
-    "assertthat"
+    "assertthat",
+    "webshot2"
   )
 )
 
