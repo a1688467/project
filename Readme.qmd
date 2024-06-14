@@ -4,9 +4,15 @@ format: html
 editor: visual
 ---
 
+# Explaining the project
+
+The data was from an experiment that looks at the effect a novel treatment has on gene expression with saline as a placebo. Additionally there were two cell lines used, application of a growth factor with different concentration varying between 0 and 10 mg/ml and six different types of cells.
+
+This readme doesn't contain the full analysis or indepth looks at interesting stuff. It just explains how the project has progressed. The report.qmd and rendered versions have the IMRaD report that goes into detail. Karl requested EDA and the (fancy) interaction plot which use this data as well as sample size calculations for new data and a new model. All three of these things are included in this document while the EDA powerpoint is in the top level directory.
+
 # Running the project
 
--   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already.
+-   This project uses targets, targets and tarchetypes so ensure you have the requirements installed already. Rstudio is handy as a project file is provided.
 
 -   Run the makefile before you do anything else.
 
@@ -23,7 +29,7 @@ No data was missing and we've cleaned up naming and stuff:
 ```{r}
 pacman::p_load(tidyverse, targets, lme4, lmerTest, mixedup, gt, skimr)
 tar_load(cleaned_data)
-skim(cleaned_data)
+skimr::skim_without_charts(cleaned_data)
 ```
 
 Let's look at the response:
@@ -112,6 +118,8 @@ AIC wants the three-way interaction model and the anova rules out the simple mod
 
 So let's stick with the three way, it's AIC is quite a bit lower although explaining the interaction between treatment, concentration and cell_line will be annoying (the two way model was much simpler as it didn't even include the cell_line! Although the plot does show that there is some effect from this.
 
+Importantly, the imerTest package often uses global state so to work with targets we've had to add a workaround in the clean_data file. It's documented there and in \_targets as well.
+
 # Final model
 
 ```{r}
@@ -147,3 +155,4 @@ new_model_sample_size
 ```{r}
 here::here()
 ```
+
